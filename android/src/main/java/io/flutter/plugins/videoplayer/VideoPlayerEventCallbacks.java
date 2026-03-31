@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import io.flutter.plugin.common.BinaryMessenger;
+import java.util.Map;
 
 final class VideoPlayerEventCallbacks implements VideoPlayerCallbacks {
   private final QueuingEventSink eventSink;
@@ -70,7 +71,7 @@ final class VideoPlayerEventCallbacks implements VideoPlayerCallbacks {
   }
 
   @Override
-  public void onEvent(Map<String, Object> event) {
-    eventSink.success(event);
+  public void onEvent(boolean loopPlayback) {
+    eventSink.success(new LoopPlaybackEndEvent(loopPlayback));
   }
 }

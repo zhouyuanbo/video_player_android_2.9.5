@@ -28,5 +28,5 @@ public interface VideoPlayerCallbacks {
 
   void onAudioTrackChanged(@Nullable String selectedTrackId);
 
-  void onEvent(Map<String, Object> event); // 添加这个方法
+  void onEvent(boolean event); // 添加这个方法
 }

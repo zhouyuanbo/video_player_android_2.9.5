@@ -1,3 +1,4 @@
+import com.android.build.gradle.LibraryExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 group = "io.flutter.plugins.videoplayer"
@@ -15,6 +16,8 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
     }
 }
+apply(plugin = "com.android.library")
+apply(plugin = "kotlin-android")
 
 allprojects {
     repositories {
@@ -23,20 +26,14 @@ allprojects {
     }
 }
 
-plugins {
-    id("com.android.library")
-    id("kotlin-android")
-}
-
-kotlin {
+extensions.configure<org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension>("kotlin") {
     compilerOptions {
-        jvmTarget = JvmTarget.fromTarget(JavaVersion.VERSION_17.toString())
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.fromTarget(JavaVersion.VERSION_17.toString()))
     }
 }
-
-android {
+extensions.configure<LibraryExtension>("android") {
     namespace = "io.flutter.plugins.videoplayer"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 24
@@ -57,16 +54,16 @@ android {
 
     dependencies {
         val exoplayerVersion = "1.9.2"
-        implementation("androidx.media3:media3-exoplayer:${exoplayerVersion}")
-        implementation("androidx.media3:media3-exoplayer-hls:${exoplayerVersion}")
-        implementation("androidx.media3:media3-exoplayer-dash:${exoplayerVersion}")
-        implementation("androidx.media3:media3-exoplayer-rtsp:${exoplayerVersion}")
-        implementation("androidx.media3:media3-exoplayer-smoothstreaming:${exoplayerVersion}")
-        testImplementation("junit:junit:4.13.2")
-        testImplementation("androidx.test:core:1.7.0")
-        testImplementation("org.mockito:mockito-core:5.23.0")
-        testImplementation("org.robolectric:robolectric:4.16")
-        testImplementation("androidx.media3:media3-test-utils:${exoplayerVersion}")
+        add("implementation", "androidx.media3:media3-exoplayer:${exoplayerVersion}")
+        add("implementation", "androidx.media3:media3-exoplayer-hls:${exoplayerVersion}")
+        add("implementation", "androidx.media3:media3-exoplayer-dash:${exoplayerVersion}")
+        add("implementation", "androidx.media3:media3-exoplayer-rtsp:${exoplayerVersion}")
+        add("implementation", "androidx.media3:media3-exoplayer-smoothstreaming:${exoplayerVersion}")
+        add("testImplementation", "junit:junit:4.13.2")
+        add("testImplementation", "androidx.test:core:1.7.0")
+        add("testImplementation", "org.mockito:mockito-core:5.23.0")
+        add("testImplementation", "org.robolectric:robolectric:4.16")
+        add("testImplementation", "androidx.media3:media3-test-utils:${exoplayerVersion}")
     }
 
     testOptions {
