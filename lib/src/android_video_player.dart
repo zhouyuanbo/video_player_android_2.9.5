@@ -454,6 +454,13 @@ class _PlayerInstance {
             isPlaying: event.isPlaying,
           ),
         );
+      case LoopPlaybackEndEvent _:
+        _eventStreamController.add(
+          VideoEvent(
+            eventType: VideoEventType.loopPlaybackEnd,
+            isLoopPlaybackEnd: event.isLoopPlaybackEnd,
+          ),
+        );
       case PlaybackStateChangeEvent _:
         switch (event.state) {
           case PlatformPlaybackState.idle:

@@ -60,6 +60,12 @@ class AudioTrackChangedEvent extends PlatformVideoEvent {
   late final String? selectedTrackId;
 }
 
+/// Sent when a looping video reaches the end of a loop.
+class LoopPlaybackEndEvent extends PlatformVideoEvent {
+  /// Indicates whether this is the end of a loop iteration.
+  late final bool isLoopPlaybackEnd;
+}
+
 /// Information passed to the platform view creation.
 class PlatformVideoViewCreationParams {
   const PlatformVideoViewCreationParams({required this.playerId});

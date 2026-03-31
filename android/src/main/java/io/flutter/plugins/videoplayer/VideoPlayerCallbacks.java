@@ -6,6 +6,7 @@ package io.flutter.plugins.videoplayer;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import java.util.Map;
 
 /**
  * Callbacks representing events invoked by {@link VideoPlayer}.
@@ -26,4 +27,6 @@ public interface VideoPlayerCallbacks {
   void onIsPlayingStateUpdate(boolean isPlaying);
 
   void onAudioTrackChanged(@Nullable String selectedTrackId);
+
+  void onEvent(Map<String, Object> event); // 添加这个方法
 }
